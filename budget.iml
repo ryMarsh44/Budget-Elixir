@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="ELIXIR_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/_build/dev/lib/budget/ebin" />
+    <output-test url="file://$MODULE_DIR$/_build/test/lib/budget/ebin" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/connection" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/db_connection" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/decimal" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/ecto" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/esqlite" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/poolboy" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/sbroker" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/sqlite_ecto2" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/sqlitex" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/connection" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/db_connection" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/decimal" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/ecto" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/esqlite" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/poolboy" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/sbroker" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/sqlite_ecto2" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/sqlitex" />
+      <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix" />
+      <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix_html" />
+      <excludeFolder url="file://$MODULE_DIR$/cover" />
+      <excludeFolder url="file://$MODULE_DIR$/deps" />
+      <excludeFolder url="file://$MODULE_DIR$/doc" />
+      <excludeFolder url="file://$MODULE_DIR$/logs" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="sqlite_ecto2" level="project" />
+    <orderEntry type="library" name="connection" level="project" />
+    <orderEntry type="library" name="credo" level="project" />
+    <orderEntry type="library" name="db_connection" level="project" />
+    <orderEntry type="library" name="decimal" level="project" />
+    <orderEntry type="library" name="excoveralls" level="project" />
+    <orderEntry type="library" name="ex_doc" level="project" />
+    <orderEntry type="library" name="ecto" level="project" />
+    <orderEntry type="library" name="poison" level="project" />
+    <orderEntry type="library" name="postgrex" level="project" />
+    <orderEntry type="library" name="sbroker" level="project" />
+    <orderEntry type="library" name="sqlitex" level="project" />
+    <orderEntry type="library" name="poolboy" level="project" />
+    <orderEntry type="library" name="mariaex" level="project" />
+    <orderEntry type="library" name="inch_ex" level="project" />
+    <orderEntry type="library" name="esqlite" level="project" />
+    <orderEntry type="library" name="dialyxir" level="project" />
+    <orderEntry type="library" name="excheck" level="project" />
+    <orderEntry type="library" name="triq" level="project" />
+  </component>
+</module>

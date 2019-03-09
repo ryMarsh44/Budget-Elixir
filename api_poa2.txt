@@ -1,0 +1,62 @@
+
+1. Expense Categories
+    - (potential overloading so json can add/remove multiple categories)
+    - add_category(..)
+    - remove_category(...)
+    - get_categories(...)
+    - hide_category(...)
+    - reveal_hidden_category(...)
+    - add_notifying_alert_for_category()
+    - goals and restrictions for categories go here
+    - add_restriction() // can't spend more than....
+
+
+2. Expenses
+    - add()
+    - remove("some key associated with expenditure")
+    - update_category_for_expenditure("some key associated with expenditure")
+    - total_expenditures(....)
+    - import(...)
+    - export(...)
+
+
+3. Storage
+    - backup_db()
+    - import_db()
+
+// Possibilities for multiple budgets for one account and possibility for multiple accounts
+4. Account
+    -add_account
+    -delete_account
+    -add_restrictions_to_account
+    -login
+    -logoff
+    -audit
+
+5. Budget
+    - create_budget()
+    - list_budgets()
+    - remove_budget()
+    - link_budgets() -> if related
+    - get_budget()
+
+
+
+
+
+
+// First Iteration:
+    -set up basic db - sqlite
+    -import_csv
+    -export_csv
+    -add_category
+    -remove_category
+    -get_categories
+    -add -> expenditure
+    -remove -> expenditure
+    -total_expenditures
+
+
+
+
+https://github.com/elixir-sqlite/sqlite_ecto2/blob/master/docs/tutorial.md
