@@ -12,6 +12,7 @@ defmodule Expenditure do
   setup do
     on_exit fn ->
       Repo.delete_all(Expenditure)
+      Repo.delete_all(Category)
     end
   end
 
