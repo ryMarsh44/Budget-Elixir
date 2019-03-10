@@ -2,11 +2,10 @@ defmodule Budget.Repo.Migrations.Expenditure do
   use Ecto.Migration
 
   def change do
-    create table(:expenditure) do
-      add :key, :string
+    create table(:expenditures) do
+      add :category_id, references(:categories)
       add :amount, :float
-      add :category, :string
-      add :metadata, :string
+      add :description, :string
       timestamps()
     end
 

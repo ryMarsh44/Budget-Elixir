@@ -1,11 +1,12 @@
 defmodule Budget.Expenditure do
   use Ecto.Schema
+  alias Budget.Category
 
-  schema "expenditure" do
-    field :key, :string
+  schema "expenditures" do
+    belongs_to :category, Category
     field :amount, :float
-    field :category, :string
-    field :metadata, :string
+    field :description, :string
     timestamps()
   end
+
 end

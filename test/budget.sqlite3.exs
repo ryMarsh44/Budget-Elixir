@@ -1,8 +1,9 @@
-defmodule BudgetText do
+defmodule BudgetDBTest do
   use ExUnit.Case
 
   alias Budget.Repo
   alias Budget.Expenditure
+  alias Budget.Category
 
   import Ecto.Query
 
@@ -14,26 +15,37 @@ defmodule BudgetText do
   setup do
     on_exit fn ->
       Repo.delete_all(Expenditure)
+      Repo.delete_all(Category)
     end
   end
 
-  test "can read and write to budget db using expenditure table" do
-    my_key = "123"
-    {:ok, expenditure} = %Expenditure{key: my_key, amount: 345.0, category: "Grocery", metadata: ""} |> Repo.insert
-    [my_key] = Expenditure |> select([expenditure], expenditure.key) |> Repo.all
+  test "can read and write to budget db using expenditures and categories tables" do
+    # assert we can insert Category
+    {:ok, rent_category} = %Category{name: "rent"} |> Repo.insert
+    Repo.insert(%Category{name: "gas"})
+    Repo.insert(%Category{name: "food"})
 
-    # assert we can insert posts
-    Repo.insert(%Expenditure{key: my_key, amount: 3.0, category: "Education", metadata: "School Loan Interest"})
-    Repo.insert(%Expenditure{key: my_key, amount: 1.0, category: "Grocery", metadata: ""})
-    Repo.insert(%Expenditure{key: my_key, amount: 4.0, category: "Fun", metadata: ""})
-    assert List.duplicate("123", 4) == Expenditure
-                                             |> select([expenditure], expenditure.key)
-                                             |> where([expenditure], expenditure.key == ^my_key)
+#    assert List("rent", "gas", "food") == Category |> select([categories], categories.name) |> where
+    assert ["rent", "gas", "food"] == Category |> select([category], category.name) |> Repo.all
+
+    my_description = "My Rent"
+    {:ok, expenditure} = %Expenditure{amount: 345.0, category_id: rent_category.id, description: my_description} |> Repo.insert
+    [345.0] = Expenditure |> select([expenditure], expenditure.amount) |> Repo.all
+
+    # assert we can insert Expenditure
+    Repo.insert(%Expenditure{amount: 3.0, category_id: rent_category.id, description: my_description})
+    Repo.insert(%Expenditure{amount: 1.0, category_id: rent_category.id, description: my_description})
+    Repo.insert(%Expenditure{amount: 4.0, category_id: rent_category.id, description: my_description})
+    assert List.duplicate(my_description, 4) == Expenditure
+                                             |> select([expenditure], expenditure.description)
+                                             |> where([expenditure], expenditure.description == ^my_description)
                                              |> Repo.all
 
+
     # ... and one more expenditure for good measure
+    {:ok, general_category} = %Category{name: "general"} |> Repo.insert
     cost = 97879.0
-    {:ok, expenditure} = %Expenditure{key: "777", amount: cost, category: "None", metadata: ""} |> Repo.insert
+    {:ok, expenditure} = %Expenditure{amount: cost, category_id: general_category.id, description: ""} |> Repo.insert
     assert [cost] == Expenditure
                      |> select([expenditure], expenditure.amount)
                      |> where([expenditure], expenditure.amount >= 1000.0)
