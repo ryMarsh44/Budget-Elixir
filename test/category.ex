@@ -57,7 +57,7 @@ defmodule Expenditure do
     [remove_two | test_after_remove] = category_list
     CategoryService.remove(remove_two)
 
-    assert test_after_remove = CategoryService.list()
+    assert test_after_remove == CategoryService.list()
   end
 
   test "can remove category with associated expenditures causing expenditures to be assigned to general category" do
@@ -66,5 +66,14 @@ defmodule Expenditure do
 
   test "returns empty list when deleting non-existent category" do
     assert [] == CategoryService.remove("NOT HERE")
+  end
+
+  test "can get categories" do
+    assert [] = CategoryService.get("NOT HERE")
+
+    first_category = "One"
+    {:ok, category} = CategoryService.add(first_category)
+    [test_category | _] = CategoryService.get(first_category)
+    assert test_category.id == category.id
   end
 end

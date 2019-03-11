@@ -34,6 +34,10 @@ defmodule Budget.CategoryService do
   end
 
   def remove(name) do
+    Enum.map get(name), &(Repo.delete!(&1))
+  end
+
+  def get(name) do
     Repo.all(from c in Category, where: c.name == ^name, select: c)
   end
 
