@@ -34,36 +34,35 @@ defmodule Expenditure do
   test "can successfully remove expenditures" do
     assert [] == ExpenditureService.remove(99999999)
 
-    id = 9999999.1
-    {:ok, expense} = ExpenditureService.add(id)
-    [{:ok, deleted_expense} | _] = ExpenditureService.remove(expense.id)
+    expense = 9999999.1
+    {:ok, expense} = ExpenditureService.add(expense)
+    [deleted_expense | _] = ExpenditureService.remove(expense.id)
     assert expense.id == deleted_expense.id
     assert [] == ExpenditureService.remove(expense.id)
 
     expense_list = [{2.0, "Car"}, {5.2, "Food", "Random"}]
     [{:ok, second} | [{:ok, third} | _]] = ExpenditureService.add_expenses(expense_list)
-    [{:ok, remove_2}, [{:ok, remove_3} | _]] = ExpenditureService.remove([second.id, third.id])
-    assert second.id == remove_2.id
     assert [] != ExpenditureService.get(third.id)
-    assert third.id == remove_3.id
 
+    [remove_2 | [remove_3 | _]] = ExpenditureService.remove([second.id, third.id])
+    assert second.id == remove_2.id
+    assert third.id == remove_3.id
     assert [] == ExpenditureService.get(third.id)
   end
 
-#  test "can successfully filter expenditures" do
-#
-#  end
+  test "can successfully filter expenditures" do
+    expense_list = [{2.0, "Car"}, {5.2, "Food", "Random"}, {3.1, "Car"}, {1.0, "Car"}, {8.9, "Food"},{8.0, "General"}]
+    [{:ok, _} | _] = ExpenditureService.add_expenses(expense_list)
+    assert 6.1 == ExpenditureService.category_expenses("Car")
+    assert 14.1 == ExpenditureService.category_expenses(["Car", "General"])
+  end
 
   test "can calculate total expenses" do
     expense_list = [{1.0}, {2.0, "Car"}, {5.2, "Food", "Random"}]
     [{:ok, second} | [{:ok, third} | _]] = ExpenditureService.add_expenses(expense_list)
-    assert 6.7 == ExpenditureService.total_expenses()
+    assert 8.2 == ExpenditureService.total_expenses()
   end
 
-#  test "can successfully calculate expenditure amounts" do
-#
-#  end
-#
 #  test "can import csv file and add the expenditures" do
 #
 #  end

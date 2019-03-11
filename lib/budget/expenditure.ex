@@ -13,6 +13,7 @@ end
 
 defmodule Budget.ExpenditureService do
 
+  import Ecto
   import Ecto.Query
   alias Budget.Repo
   alias Budget.Expenditure
@@ -53,7 +54,7 @@ defmodule Budget.ExpenditureService do
 
   @spec remove(List.t) :: [%Expenditure{}]
   def remove([head | tail]) do
-    [remove(head)] ++ remove(tail)
+    remove(head) ++ remove(tail)
   end
 
   @spec remove(Integer.t) :: %Expenditure{}
@@ -73,10 +74,15 @@ defmodule Budget.ExpenditureService do
     Enum.reduce list(), 0, fn x, acc -> x.amount + acc end
   end
 
-#  def category_totals(categories) do
-#    Enum.each categories &(Enum.each CategoryService.get(&1), &())
-#    |>
-#    Enum.each categories, &()
-#  end
+  def category_expenses(nil), do: 0
+  def category_expenses([]), do: 0
+  def category_expenses([head | tail]) do
+    category_expenses(head) + category_expenses(tail)
+  end
+
+  def category_expenses(category) do
+    [category | _ ] = CategoryService.get(category)
+    Enum.reduce Repo.all(assoc(category, :expenditures)), 0, fn x, acc -> x.amount + acc end
+  end
 
 end
